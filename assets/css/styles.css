@@ -256,6 +256,25 @@
       font-size: 14px;
     }
 
+    .seo-card {
+      display: grid;
+      gap: 12px;
+    }
+
+    .seo-card h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: 32px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .seo-card p {
+      max-width: 880px;
+      font-size: 15px;
+      color: #405064;
+    }
+
     .stats {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
