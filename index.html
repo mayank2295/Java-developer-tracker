@@ -49,7 +49,8 @@
       </div>
 
       <nav class="nav" aria-label="Learning platform navigation">
-        <button class="nav-btn active" data-view="dashboard"><span class="nav-left"><span class="nav-key">D</span>Dashboard</span><span>></span></button>
+        <button class="nav-btn active" data-view="start"><span class="nav-left"><span class="nav-key">S</span>Start Here</span><span>></span></button>
+        <button class="nav-btn" data-view="dashboard"><span class="nav-left"><span class="nav-key">D</span>Dashboard</span><span>></span></button>
         <button class="nav-btn" data-view="curriculum"><span class="nav-left"><span class="nav-key">C</span>Curriculum</span><span>></span></button>
         <button class="nav-btn" data-view="lessons"><span class="nav-left"><span class="nav-key">L</span>Lessons</span><span>></span></button>
         <button class="nav-btn" data-view="examples"><span class="nav-left"><span class="nav-key">E</span>Code Examples</span><span>></span></button>
@@ -75,8 +76,8 @@
     <main class="main">
       <header class="topbar">
         <div>
-          <h2 id="viewTitle">Dashboard</h2>
-          <p id="viewSubtitle">Track the whole journey from development basics to product-company interview readiness.</p>
+          <h2 id="viewTitle">Start Here</h2>
+          <p id="viewSubtitle">Follow one guided path: learn, practice, build, quiz, and revise.</p>
         </div>
         <div class="top-actions">
           <button class="btn" id="exportBtn" type="button">Export notes</button>
@@ -84,7 +85,71 @@
         </div>
       </header>
 
-      <section class="view active" id="dashboard">
+      <section class="view active" id="start">
+        <div class="grid dashboard-grid">
+          <div class="grid">
+            <div class="card hero-card">
+              <h1>Java Spring Full Stack Learning Path</h1>
+              <p>Use this platform like a course, not a random tracker. Start with foundations, build one thing after every phase, then use notes, examples, quiz, and checklist to become interview-ready.</p>
+              <div class="action-strip">
+                <button class="btn primary" data-jump="curriculum" type="button">Start Phase 1</button>
+                <button class="btn" data-jump="flow" type="button">Understand full stack flow</button>
+                <button class="btn" data-jump="projects" type="button">See project path</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head">
+                <div>
+                  <h3>The Flow You Should Follow</h3>
+                  <p>Every phase has the same learning loop so you never feel lost.</p>
+                </div>
+              </div>
+              <div class="journey-grid">
+                <article class="journey-step"><strong>1. Learn</strong><span>Read/watch only the topics listed for the current phase.</span></article>
+                <article class="journey-step"><strong>2. Code</strong><span>Open Code Examples and type the example yourself.</span></article>
+                <article class="journey-step"><strong>3. Build</strong><span>Add the concept to your project immediately.</span></article>
+                <article class="journey-step"><strong>4. Explain</strong><span>Write a note in Hinglish like you are teaching a junior.</span></article>
+                <article class="journey-step"><strong>5. Test</strong><span>Take the quiz and use the checklist before moving ahead.</span></article>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head">
+                <div>
+                  <h3>Beginner Route</h3>
+                  <p>Do not jump to Kafka or cloud first. This order is the clean path.</p>
+                </div>
+              </div>
+              <div class="phase-route">
+                <div class="route-item"><span>01</span><strong>Web + Java basics</strong><em>Understand browser, HTTP, Java OOP, collections, streams.</em></div>
+                <div class="route-item"><span>02</span><strong>Spring Boot REST API</strong><em>Build backend APIs with service/repository/JPA/MySQL.</em></div>
+                <div class="route-item"><span>03</span><strong>React integration</strong><em>Call backend from UI using forms, routing, Axios/fetch.</em></div>
+                <div class="route-item"><span>04</span><strong>JWT + Spring Security</strong><em>Add login, roles, protected routes, token flow.</em></div>
+                <div class="route-item"><span>05</span><strong>Deploy + explain</strong><em>Docker, cloud database, README, architecture, interview story.</em></div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="grid">
+            <div class="card">
+              <h3>Today's Rule</h3>
+              <p class="muted">One concept, one code example, one project change, one note. That is how development starts becoming real.</p>
+            </div>
+            <div class="card">
+              <h3>First 7 Days</h3>
+              <div class="checklist">
+                <label class="check"><input type="checkbox" data-task="start-http">Explain HTTP request-response flow.</label>
+                <label class="check"><input type="checkbox" data-task="start-java">Revise Java OOP, Collections, Streams.</label>
+                <label class="check"><input type="checkbox" data-task="start-rest">Create first Spring Boot REST endpoint.</label>
+                <label class="check"><input type="checkbox" data-task="start-note">Write your first note in the Notes section.</label>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="dashboard">
         <div class="grid dashboard-grid">
           <div class="grid">
             <div class="card seo-card">
@@ -192,8 +257,78 @@
         <div class="card">
           <div class="card-head">
             <div>
-              <h3>Curriculum Tracks</h3>
-              <p>Backend depth plus practical full-stack understanding. Ye order follow karna.</p>
+              <h3>Guided Curriculum</h3>
+              <p>Each phase connects lessons, examples, projects, quiz, and notes into one beginner-friendly path.</p>
+            </div>
+          </div>
+          <div class="guided-phases">
+            <article class="path-card">
+              <div class="path-head"><span>Phase 1</span><strong>Web + Java Foundations</strong><em>2-4 weeks</em></div>
+              <p>Goal: understand how browser, HTTP, JSON, Java OOP, collections, and streams work before touching heavy Spring Security.</p>
+              <div class="phase-flow">
+                <span>Learn: HTTP, REST, Java 8, Maven</span>
+                <span>Example: REST API tab</span>
+                <span>Build: Java mini app + first endpoint</span>
+                <span>Check: explain request-response</span>
+              </div>
+              <label class="check"><input type="checkbox" data-task="phase1-complete">Phase 1 complete: I can explain HTTP + Java basics and create one endpoint.</label>
+            </article>
+
+            <article class="path-card">
+              <div class="path-head"><span>Phase 2</span><strong>Spring Boot REST + Database</strong><em>6-8 weeks</em></div>
+              <p>Goal: build real backend APIs with controller, service, repository, DTO, validation, global exceptions, JPA, and MySQL.</p>
+              <div class="phase-flow">
+                <span>Learn: Spring Boot, JPA, MySQL</span>
+                <span>Example: JPA tab</span>
+                <span>Build: Task Manager API</span>
+                <span>Check: Postman + tests</span>
+              </div>
+              <label class="check"><input type="checkbox" data-task="phase2-complete">Phase 2 complete: I have a tested backend API with MySQL.</label>
+            </article>
+
+            <article class="path-card">
+              <div class="path-head"><span>Phase 3</span><strong>React + API Integration</strong><em>4 weeks</em></div>
+              <p>Goal: make frontend and backend communicate. Forms should call Spring Boot APIs and show loading, success, and error states.</p>
+              <div class="phase-flow">
+                <span>Learn: React, Router, forms</span>
+                <span>Example: React API tab</span>
+                <span>Build: UI for Task Manager</span>
+                <span>Check: CRUD from browser</span>
+              </div>
+              <label class="check"><input type="checkbox" data-task="phase3-complete">Phase 3 complete: I can perform CRUD from React UI.</label>
+            </article>
+
+            <article class="path-card">
+              <div class="path-head"><span>Phase 4</span><strong>JWT + Spring Security</strong><em>4 weeks</em></div>
+              <p>Goal: understand authentication deeply. Add register, login, JWT, roles, protected APIs, and protected React routes.</p>
+              <div class="phase-flow">
+                <span>Learn: filters, BCrypt, 401/403</span>
+                <span>Example: JWT tab</span>
+                <span>Build: Auth Notes app</span>
+                <span>Check: role-based access</span>
+              </div>
+              <label class="check"><input type="checkbox" data-task="phase4-complete">Phase 4 complete: I can explain JWT login to protected API flow.</label>
+            </article>
+
+            <article class="path-card">
+              <div class="path-head"><span>Phase 5</span><strong>Docker + Cloud + Interview Story</strong><em>6-8 weeks</em></div>
+              <p>Goal: deploy a project with persistent database, clean README, architecture diagram, and a strong interview explanation.</p>
+              <div class="phase-flow">
+                <span>Learn: Docker, env vars, cloud DB</span>
+                <span>Example: Docker tab</span>
+                <span>Build: deployed flagship project</span>
+                <span>Check: readiness checklist</span>
+              </div>
+              <label class="check"><input type="checkbox" data-task="phase5-complete">Phase 5 complete: I have a deployed project and can explain it clearly.</label>
+            </article>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 14px;">
+          <div class="card-head">
+            <div>
+              <h3>Topic Map</h3>
+              <p>Use this as the detailed topic inventory after you understand the phase flow above.</p>
             </div>
           </div>
           <div class="module-grid">
@@ -272,17 +407,21 @@
             <div class="card-head">
               <div>
                 <h3>Lesson Queue</h3>
-                <p>Short practical lessons. Complete, then make notes in your own words.</p>
+                <p>Complete these in order. Each lesson points to the next action so learning does not stay theoretical.</p>
               </div>
             </div>
+            <div class="lesson-flow-banner">
+              <span>Current loop</span>
+              <strong>Lesson -> Code Example -> Project Task -> Note -> Quiz</strong>
+            </div>
             <div class="lesson-list">
-              <article class="lesson"><input type="checkbox" data-task="lesson-http"><div><strong>HTTP, REST, JSON, status codes</strong><p>Understand GET, POST, PUT, DELETE, 200, 201, 400, 401, 403, 404, 500.</p></div><span class="tag frontend">Web</span></article>
-              <article class="lesson"><input type="checkbox" data-task="lesson-controller"><div><strong>Controller, Service, Repository</strong><p>Controller receives request, service owns business logic, repository talks to DB.</p></div><span class="tag backend">Backend</span></article>
-              <article class="lesson"><input type="checkbox" data-task="lesson-jpa"><div><strong>JPA entities and relationships</strong><p>Learn one-to-many, many-to-one, lazy loading, DTO mapping, and N+1 basics.</p></div><span class="tag backend">Backend</span></article>
-              <article class="lesson"><input type="checkbox" data-task="lesson-react-api"><div><strong>React API service layer</strong><p>Create api.js, centralize base URL, attach JWT header, handle loading and errors.</p></div><span class="tag frontend">React</span></article>
-              <article class="lesson"><input type="checkbox" data-task="lesson-jwt"><div><strong>JWT login flow</strong><p>Login, token generation, Authorization header, filter validation, protected endpoint.</p></div><span class="tag security">Security</span></article>
-              <article class="lesson"><input type="checkbox" data-task="lesson-docker"><div><strong>Docker compose for Spring Boot + MySQL</strong><p>Run app and DB together locally. Learn volumes so DB data does not vanish.</p></div><span class="tag devops">DevOps</span></article>
-              <article class="lesson"><input type="checkbox" data-task="lesson-cloud-db"><div><strong>Cloud database persistence</strong><p>Use AWS RDS or Azure Database. App restarts should not delete your data.</p></div><span class="tag cloud">Cloud</span></article>
+              <article class="lesson"><input type="checkbox" data-task="lesson-http"><div><strong>1. HTTP, REST, JSON, status codes</strong><p>Then open Full Stack Flow and explain one login request from React to Spring Boot.</p></div><span class="tag frontend">Web</span></article>
+              <article class="lesson"><input type="checkbox" data-task="lesson-controller"><div><strong>2. Controller, Service, Repository</strong><p>Then open Code Examples -> REST API and create one endpoint in your own project.</p></div><span class="tag backend">Backend</span></article>
+              <article class="lesson"><input type="checkbox" data-task="lesson-jpa"><div><strong>3. JPA entities and relationships</strong><p>Then open Code Examples -> JPA and connect one entity to MySQL.</p></div><span class="tag backend">Backend</span></article>
+              <article class="lesson"><input type="checkbox" data-task="lesson-react-api"><div><strong>4. React API service layer</strong><p>Then open Code Examples -> React API and call your backend from one screen.</p></div><span class="tag frontend">React</span></article>
+              <article class="lesson"><input type="checkbox" data-task="lesson-jwt"><div><strong>5. JWT login flow</strong><p>Then open Code Examples -> JWT and write the flow in your Notes section.</p></div><span class="tag security">Security</span></article>
+              <article class="lesson"><input type="checkbox" data-task="lesson-docker"><div><strong>6. Docker compose for Spring Boot + MySQL</strong><p>Then open Code Examples -> Docker and run app + database locally.</p></div><span class="tag devops">DevOps</span></article>
+              <article class="lesson"><input type="checkbox" data-task="lesson-cloud-db"><div><strong>7. Cloud database persistence</strong><p>Then deploy one app with a managed database so data survives app restarts.</p></div><span class="tag cloud">Cloud</span></article>
             </div>
           </div>
 
@@ -573,12 +712,12 @@ volumes:
           <div class="card-head">
             <div>
               <h3>Project Lab</h3>
-              <p>Projects are your interview proof. Make them deployed, documented, and explainable.</p>
+              <p>Build projects in this exact order. Each project exists to prove one phase of your learning.</p>
             </div>
           </div>
           <div class="project-list">
             <article class="project">
-              <strong>Project 1: Task Manager REST API</strong>
+              <strong>Phase 2 Project: Task Manager REST API</strong>
               <p>Spring Boot, MySQL, CRUD, pagination, validation, global exceptions, tests, Postman collection.</p>
               <div class="checklist">
                 <label class="check"><input type="checkbox" data-task="project1-api">API endpoints complete</label>
@@ -588,7 +727,7 @@ volumes:
             </article>
 
             <article class="project">
-              <strong>Project 2: Auth Notes Full Stack App</strong>
+              <strong>Phase 3-4 Project: Auth Notes Full Stack App</strong>
               <p>React + Spring Boot with JWT login/register, protected routes, notes CRUD, MySQL persistence.</p>
               <div class="checklist">
                 <label class="check"><input type="checkbox" data-task="project2-auth">JWT auth complete</label>
@@ -598,7 +737,7 @@ volumes:
             </article>
 
             <article class="project">
-              <strong>Project 3: E-Commerce or Inventory System</strong>
+              <strong>Phase 5 Flagship: E-Commerce or Inventory System</strong>
               <p>Products, cart, orders, admin dashboard, inventory updates, Docker, cloud DB, clear architecture diagram.</p>
               <div class="checklist">
                 <label class="check"><input type="checkbox" data-task="project3-schema">Database schema designed</label>
@@ -608,7 +747,7 @@ volumes:
             </article>
 
             <article class="project">
-              <strong>Project 4: Kafka Notification Service</strong>
+              <strong>Advanced Add-on: Kafka Notification Service</strong>
               <p>Order placed event, Kafka producer, Kafka consumer, notification table, optional email sending.</p>
               <div class="checklist">
                 <label class="check"><input type="checkbox" data-task="project4-producer">Producer publishes event</label>
