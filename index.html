@@ -52,9 +52,12 @@
         <button class="nav-btn active" data-view="dashboard"><span class="nav-left"><span class="nav-key">D</span>Dashboard</span><span>></span></button>
         <button class="nav-btn" data-view="curriculum"><span class="nav-left"><span class="nav-key">C</span>Curriculum</span><span>></span></button>
         <button class="nav-btn" data-view="lessons"><span class="nav-left"><span class="nav-key">L</span>Lessons</span><span>></span></button>
+        <button class="nav-btn" data-view="examples"><span class="nav-left"><span class="nav-key">E</span>Code Examples</span><span>></span></button>
+        <button class="nav-btn" data-view="quiz"><span class="nav-left"><span class="nav-key">Q</span>Quiz</span><span>></span></button>
         <button class="nav-btn" data-view="projects"><span class="nav-left"><span class="nav-key">P</span>Project Lab</span><span>></span></button>
         <button class="nav-btn" data-view="notes"><span class="nav-left"><span class="nav-key">N</span>Notes</span><span>></span></button>
         <button class="nav-btn" data-view="flow"><span class="nav-left"><span class="nav-key">F</span>Full Stack Flow</span><span>></span></button>
+        <button class="nav-btn" data-view="checklist"><span class="nav-left"><span class="nav-key">K</span>Checklist</span><span>></span></button>
         <button class="nav-btn" data-view="timeline"><span class="nav-left"><span class="nav-key">T</span>Timeline</span><span>></span></button>
         <button class="nav-btn" data-view="resources"><span class="nav-left"><span class="nav-key">R</span>Resources</span><span>></span></button>
       </nav>
@@ -107,7 +110,7 @@
                 <div class="stat"><strong id="overallPercent">0%</strong><span>Overall completion</span></div>
                 <div class="stat"><strong id="doneCount">0</strong><span>Completed checkpoints</span></div>
                 <div class="stat"><strong id="noteCount">0</strong><span>Saved notes</span></div>
-                <div class="stat"><strong>Jul 2027</strong><span>Interview-ready target</span></div>
+                <div class="stat"><strong id="quizScoreStat">0/8</strong><span>Latest quiz score</span></div>
               </div>
               <div class="progress-track"><div class="progress-fill" id="overallBar"></div></div>
             </div>
@@ -304,6 +307,264 @@
             </form>
             <div class="lesson-list" id="customTasks" style="margin-top: 12px;"></div>
           </aside>
+        </div>
+      </section>
+
+      <section class="view" id="examples">
+        <div class="split">
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h3>Code Examples</h3>
+                <p>Study real snippets for Java Full Stack development. Copy, run, modify, then add notes.</p>
+              </div>
+            </div>
+            <div class="example-tabs" role="tablist" aria-label="Code example categories">
+              <button class="example-tab active" data-example="rest" type="button">REST API</button>
+              <button class="example-tab" data-example="jpa" type="button">JPA</button>
+              <button class="example-tab" data-example="jwt" type="button">JWT</button>
+              <button class="example-tab" data-example="react" type="button">React API</button>
+              <button class="example-tab" data-example="docker" type="button">Docker</button>
+            </div>
+
+            <article class="code-panel active" data-example-panel="rest">
+              <div class="code-head"><strong>TaskController.java</strong><button class="small-btn" data-copy-code="rest" type="button">Copy</button></div>
+              <pre><code id="code-rest">@RestController
+@RequestMapping("/api/tasks")
+public class TaskController {
+    private final TaskService taskService;
+
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
+
+    @PostMapping
+    public ResponseEntity&lt;TaskResponse&gt; create(@Valid @RequestBody TaskRequest request) {
+        TaskResponse response = taskService.createTask(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping
+    public Page&lt;TaskResponse&gt; list(Pageable pageable) {
+        return taskService.findAll(pageable);
+    }
+}</code></pre>
+            </article>
+
+            <article class="code-panel" data-example-panel="jpa">
+              <div class="code-head"><strong>Task Entity + Repository</strong><button class="small-btn" data-copy-code="jpa" type="button">Copy</button></div>
+              <pre><code id="code-jpa">@Entity
+@Table(name = "tasks")
+public class Task {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String title;
+
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status;
+}
+
+public interface TaskRepository extends JpaRepository&lt;Task, Long&gt; {
+    Page&lt;Task&gt; findByStatus(TaskStatus status, Pageable pageable);
+}</code></pre>
+            </article>
+
+            <article class="code-panel" data-example-panel="jwt">
+              <div class="code-head"><strong>JWT Request Filter</strong><button class="small-btn" data-copy-code="jwt" type="button">Copy</button></div>
+              <pre><code id="code-jwt">@Component
+public class JwtAuthFilter extends OncePerRequestFilter {
+    protected void doFilterInternal(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain chain) throws ServletException, IOException {
+
+        String header = request.getHeader("Authorization");
+        if (header != null && header.startsWith("Bearer ")) {
+            String token = header.substring(7);
+            String username = jwtService.extractUsername(token);
+            UsernamePasswordAuthenticationToken auth =
+                    new UsernamePasswordAuthenticationToken(username, null, List.of());
+            SecurityContextHolder.getContext().setAuthentication(auth);
+        }
+        chain.doFilter(request, response);
+    }
+}</code></pre>
+            </article>
+
+            <article class="code-panel" data-example-panel="react">
+              <div class="code-head"><strong>React API Service</strong><button class="small-btn" data-copy-code="react" type="button">Copy</button></div>
+              <pre><code id="code-react">import axios from "axios";
+
+const api = axios.create({
+  baseURL: "https://your-backend.com/api"
+});
+
+api.interceptors.request.use((config) =&gt; {
+  const token = localStorage.getItem("token");
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
+
+export async function getTasks() {
+  const response = await api.get("/tasks");
+  return response.data;
+}</code></pre>
+            </article>
+
+            <article class="code-panel" data-example-panel="docker">
+              <div class="code-head"><strong>docker-compose.yml</strong><button class="small-btn" data-copy-code="docker" type="button">Copy</button></div>
+              <pre><code id="code-docker">services:
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_DATABASE: tracker_db
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/tracker_db
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:</code></pre>
+            </article>
+          </div>
+
+          <aside class="card">
+            <h3>How to use examples</h3>
+            <div class="checklist">
+              <label class="check"><input type="checkbox" data-task="example-run">Run one example locally.</label>
+              <label class="check"><input type="checkbox" data-task="example-modify">Modify it for your own project.</label>
+              <label class="check"><input type="checkbox" data-task="example-explain">Explain it in simple Hinglish notes.</label>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="quiz">
+        <div class="split">
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h3>Java Full Stack Quiz</h3>
+                <p>Test whether concepts are actually clear. Score is saved locally.</p>
+              </div>
+              <div class="quiz-score" id="quizScore">Score: 0/8</div>
+            </div>
+            <form id="quizForm" class="quiz-list">
+              <fieldset class="quiz-question" data-answer="b">
+                <legend>1. In Spring Boot, which layer should contain business logic?</legend>
+                <label><input type="radio" name="q1" value="a"> Controller</label>
+                <label><input type="radio" name="q1" value="b"> Service</label>
+                <label><input type="radio" name="q1" value="c"> Entity</label>
+              </fieldset>
+              <fieldset class="quiz-question" data-answer="c">
+                <legend>2. What does HTTP 401 usually mean?</legend>
+                <label><input type="radio" name="q2" value="a"> Server crashed</label>
+                <label><input type="radio" name="q2" value="b"> Resource not found</label>
+                <label><input type="radio" name="q2" value="c"> Authentication is missing or invalid</label>
+              </fieldset>
+              <fieldset class="quiz-question" data-answer="a">
+                <legend>3. Where does React usually send a JWT token?</legend>
+                <label><input type="radio" name="q3" value="a"> Authorization header</label>
+                <label><input type="radio" name="q3" value="b"> CSS file</label>
+                <label><input type="radio" name="q3" value="c"> SQL table name</label>
+              </fieldset>
+              <fieldset class="quiz-question" data-answer="b">
+                <legend>4. Which Spring Data interface gives CRUD methods?</legend>
+                <label><input type="radio" name="q4" value="a"> ResponseEntity</label>
+                <label><input type="radio" name="q4" value="b"> JpaRepository</label>
+                <label><input type="radio" name="q4" value="c"> RestTemplate</label>
+              </fieldset>
+              <fieldset class="quiz-question" data-answer="c">
+                <legend>5. Why use Docker Compose in a Spring Boot project?</legend>
+                <label><input type="radio" name="q5" value="a"> To write Java classes</label>
+                <label><input type="radio" name="q5" value="b"> To replace GitHub</label>
+                <label><input type="radio" name="q5" value="c"> To run app and dependencies together</label>
+              </fieldset>
+              <fieldset class="quiz-question" data-answer="a">
+                <legend>6. What makes cloud database data persistent?</legend>
+                <label><input type="radio" name="q6" value="a"> Data is stored outside the frontend/browser</label>
+                <label><input type="radio" name="q6" value="b"> React state is used</label>
+                <label><input type="radio" name="q6" value="c"> The page has CSS</label>
+              </fieldset>
+              <fieldset class="quiz-question" data-answer="b">
+                <legend>7. Kafka is mainly used for which style of communication?</legend>
+                <label><input type="radio" name="q7" value="a"> Styling buttons</label>
+                <label><input type="radio" name="q7" value="b"> Event-driven asynchronous messaging</label>
+                <label><input type="radio" name="q7" value="c"> Password hashing</label>
+              </fieldset>
+              <fieldset class="quiz-question" data-answer="c">
+                <legend>8. What is the best portfolio proof for product roles?</legend>
+                <label><input type="radio" name="q8" value="a"> Only course certificates</label>
+                <label><input type="radio" name="q8" value="b"> Only DSA streak screenshots</label>
+                <label><input type="radio" name="q8" value="c"> Deployed projects with clean architecture and explanation</label>
+              </fieldset>
+              <div class="top-actions">
+                <button class="btn blue" type="submit">Check score</button>
+                <button class="btn" id="quizReset" type="button">Try again</button>
+              </div>
+            </form>
+          </div>
+
+          <aside class="card">
+            <h3>Quiz rule</h3>
+            <p class="muted">If you score below 6, go back to Flow, Lessons, and Examples before moving deeper into projects.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="checklist">
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h3>Interview Readiness Checklist</h3>
+              <p>Use this before applying or discussing your project in interviews.</p>
+            </div>
+          </div>
+          <div class="module-grid">
+            <article class="module">
+              <h4>Backend Depth</h4>
+              <div class="checklist">
+                <label class="check"><input type="checkbox" data-task="ready-rest">Can design REST APIs with correct methods and status codes.</label>
+                <label class="check"><input type="checkbox" data-task="ready-layering">Can explain Controller-Service-Repository clearly.</label>
+                <label class="check"><input type="checkbox" data-task="ready-jpa">Can explain JPA relationships and lazy loading basics.</label>
+              </div>
+            </article>
+            <article class="module">
+              <h4>Security</h4>
+              <div class="checklist">
+                <label class="check"><input type="checkbox" data-task="ready-jwt">Can explain JWT login to protected API flow.</label>
+                <label class="check"><input type="checkbox" data-task="ready-roles">Can implement role-based access.</label>
+                <label class="check"><input type="checkbox" data-task="ready-cors">Can explain CORS and 401 vs 403.</label>
+              </div>
+            </article>
+            <article class="module">
+              <h4>Frontend Integration</h4>
+              <div class="checklist">
+                <label class="check"><input type="checkbox" data-task="ready-react-api">Can call backend APIs from React.</label>
+                <label class="check"><input type="checkbox" data-task="ready-forms">Can build forms with loading and error states.</label>
+                <label class="check"><input type="checkbox" data-task="ready-token">Can attach JWT to requests safely.</label>
+              </div>
+            </article>
+            <article class="module">
+              <h4>Deployment and Resume</h4>
+              <div class="checklist">
+                <label class="check"><input type="checkbox" data-task="ready-deploy">Has one deployed full-stack project.</label>
+                <label class="check"><input type="checkbox" data-task="ready-readme">Has README with architecture, setup, APIs, screenshots.</label>
+                <label class="check"><input type="checkbox" data-task="ready-story">Can explain project tradeoffs in 2 minutes.</label>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 

@@ -8,6 +8,10 @@ const titles = window.PLATFORM_DATA.viewTitles;
     const doneCount = document.getElementById("doneCount");
     const noteCount = document.getElementById("noteCount");
     const overallBar = document.getElementById("overallBar");
+    const quizScoreStat = document.getElementById("quizScoreStat");
+    const quizScore = document.getElementById("quizScore");
+    const quizForm = document.getElementById("quizForm");
+    const quizReset = document.getElementById("quizReset");
     const toast = document.getElementById("toast");
     const notesList = document.getElementById("notesList");
     const noteForm = document.getElementById("noteForm");
@@ -41,6 +45,30 @@ const titles = window.PLATFORM_DATA.viewTitles;
       button.addEventListener("click", () => switchView(button.dataset.jump));
     });
 
+    document.querySelectorAll(".example-tab").forEach((button) => {
+      button.addEventListener("click", () => {
+        const key = button.dataset.example;
+        document.querySelectorAll(".example-tab").forEach((tab) => {
+          tab.classList.toggle("active", tab === button);
+        });
+        document.querySelectorAll(".code-panel").forEach((panel) => {
+          panel.classList.toggle("active", panel.dataset.examplePanel === key);
+        });
+      });
+    });
+
+    document.querySelectorAll("[data-copy-code]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const code = document.getElementById("code-" + button.dataset.copyCode)?.innerText || "";
+        try {
+          await navigator.clipboard.writeText(code);
+          showToast("Code copied");
+        } catch (error) {
+          showToast("Copy failed");
+        }
+      });
+    });
+
     function allCheckboxes() {
       return Array.from(document.querySelectorAll("input[type='checkbox'][data-task]"));
     }
@@ -69,6 +97,46 @@ const titles = window.PLATFORM_DATA.viewTitles;
       doneCount.textContent = done;
       noteCount.textContent = notes.length;
       overallBar.style.width = percent + "%";
+      const latestQuizScore = localStorage.getItem("fs-quiz-score") || "0/8";
+      if (quizScoreStat) quizScoreStat.textContent = latestQuizScore;
+      if (quizScore) quizScore.textContent = "Score: " + latestQuizScore;
+    }
+
+    function scoreQuiz() {
+      if (!quizForm) return;
+      let score = 0;
+      const questions = Array.from(document.querySelectorAll(".quiz-question"));
+      questions.forEach((question) => {
+        const answer = question.dataset.answer;
+        const selected = question.querySelector("input[type='radio']:checked");
+        const isCorrect = selected?.value === answer;
+        question.classList.toggle("correct", Boolean(selected && isCorrect));
+        question.classList.toggle("wrong", Boolean(selected && !isCorrect));
+        if (isCorrect) score += 1;
+      });
+      const result = score + "/" + questions.length;
+      localStorage.setItem("fs-quiz-score", result);
+      updateStats();
+      showToast("Quiz score: " + result);
+    }
+
+    if (quizForm) {
+      quizForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        scoreQuiz();
+      });
+    }
+
+    if (quizReset) {
+      quizReset.addEventListener("click", () => {
+        quizForm.reset();
+        document.querySelectorAll(".quiz-question").forEach((question) => {
+          question.classList.remove("correct", "wrong");
+        });
+        localStorage.setItem("fs-quiz-score", "0/8");
+        updateStats();
+        showToast("Quiz reset");
+      });
     }
 
     function saveNotes() {

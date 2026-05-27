@@ -548,6 +548,117 @@
     .small-btn:hover { border-color: #9fb0c4; }
     .small-btn.danger { color: var(--red); border-color: #e8baba; }
 
+    .example-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .example-tab {
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: #2e4053;
+      border-radius: 8px;
+      min-height: 38px;
+      padding: 8px 10px;
+      cursor: pointer;
+    }
+
+    .example-tab.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #fff;
+    }
+
+    .code-panel { display: none; }
+    .code-panel.active { display: block; }
+
+    .code-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border: 1px solid #263445;
+      border-bottom: 0;
+      border-radius: 8px 8px 0 0;
+      background: #172233;
+      color: #f8fbff;
+      padding: 10px 12px;
+    }
+
+    pre {
+      overflow: auto;
+      margin: 0;
+      border-radius: 0 0 8px 8px;
+      background: #0e1724;
+      color: #d8e6f3;
+      padding: 14px;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    pre code {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font-size: inherit;
+    }
+
+    .quiz-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .quiz-question {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface-2);
+      padding: 12px;
+    }
+
+    .quiz-question.correct {
+      border-color: #8cc9ad;
+      background: #eefaf4;
+    }
+
+    .quiz-question.wrong {
+      border-color: #e6aaaa;
+      background: #fff3f3;
+    }
+
+    .quiz-question legend {
+      padding: 0 3px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .quiz-question label {
+      display: block;
+      margin-top: 8px;
+      color: #344457;
+      font-size: 14px;
+    }
+
+    .quiz-question input {
+      width: 16px;
+      height: 16px;
+      min-height: auto;
+      margin-right: 7px;
+      accent-color: var(--blue);
+    }
+
+    .quiz-score {
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      border-radius: 8px;
+      padding: 8px 10px;
+      color: var(--blue);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
     .empty {
       border: 1px dashed #bac7d5;
       border-radius: 8px;
