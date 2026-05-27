@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java Full Stack Learning Platform</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">J</div>
+        <div>
+          <h1>Full Stack OS</h1>
+          <p>Java backend first, product role focused</p>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Learning platform navigation">
+        <button class="nav-btn active" data-view="dashboard"><span class="nav-left"><span class="nav-key">D</span>Dashboard</span><span>></span></button>
+        <button class="nav-btn" data-view="curriculum"><span class="nav-left"><span class="nav-key">C</span>Curriculum</span><span>></span></button>
+        <button class="nav-btn" data-view="lessons"><span class="nav-left"><span class="nav-key">L</span>Lessons</span><span>></span></button>
+        <button class="nav-btn" data-view="projects"><span class="nav-left"><span class="nav-key">P</span>Project Lab</span><span>></span></button>
+        <button class="nav-btn" data-view="notes"><span class="nav-left"><span class="nav-key">N</span>Notes</span><span>></span></button>
+        <button class="nav-btn" data-view="flow"><span class="nav-left"><span class="nav-key">F</span>Full Stack Flow</span><span>></span></button>
+        <button class="nav-btn" data-view="timeline"><span class="nav-left"><span class="nav-key">T</span>Timeline</span><span>></span></button>
+        <button class="nav-btn" data-view="resources"><span class="nav-left"><span class="nav-key">R</span>Resources</span><span>></span></button>
+      </nav>
+
+      <div class="sidebar-card">
+        <strong>My honest take</strong>
+        <p>This is a good direction. For 25-35 LPA product roles, your edge should be backend depth plus one or two real deployed full-stack projects.</p>
+      </div>
+      <div class="sidebar-card">
+        <strong>Data note</strong>
+        <p>This platform saves your notes in this browser. A deployed multi-device version needs backend plus database.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h2 id="viewTitle">Dashboard</h2>
+          <p id="viewSubtitle">Track the whole journey from development basics to product-company interview readiness.</p>
+        </div>
+        <div class="top-actions">
+          <button class="btn" id="exportBtn" type="button">Export notes</button>
+          <button class="btn danger" id="resetBtn" type="button">Reset progress</button>
+        </div>
+      </header>
+
+      <section class="view active" id="dashboard">
+        <div class="grid dashboard-grid">
+          <div class="grid">
+            <div class="card">
+              <div class="card-head">
+                <div>
+                  <h3>Roadmap Progress</h3>
+                  <p>Your learning should feel measurable, not vague.</p>
+                </div>
+                <button class="btn primary" data-jump="curriculum" type="button">Open curriculum</button>
+              </div>
+              <div class="stats">
+                <div class="stat"><strong id="overallPercent">0%</strong><span>Overall completion</span></div>
+                <div class="stat"><strong id="doneCount">0</strong><span>Completed checkpoints</span></div>
+                <div class="stat"><strong id="noteCount">0</strong><span>Saved notes</span></div>
+                <div class="stat"><strong>Jul 2027</strong><span>Interview-ready target</span></div>
+              </div>
+              <div class="progress-track"><div class="progress-fill" id="overallBar"></div></div>
+            </div>
+
+            <div class="card">
+              <div class="card-head">
+                <div>
+                  <h3>This Week's Focus</h3>
+                  <p>Keep it simple: learn one concept, code it, write notes, push to GitHub.</p>
+                </div>
+              </div>
+              <div class="checklist">
+                <label class="check"><input type="checkbox" data-task="week-api-flow">Explain frontend to backend request-response flow without notes.</label>
+                <label class="check"><input type="checkbox" data-task="week-rest-crud">Build one CRUD API in Spring Boot with Controller, Service, Repository.</label>
+                <label class="check"><input type="checkbox" data-task="week-react-call">Call one Spring Boot endpoint from React using Axios or fetch.</label>
+                <label class="check"><input type="checkbox" data-task="week-readme">Write README notes for what you learned this week.</label>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head">
+                <div>
+                  <h3>Suggested Platform Shape</h3>
+                  <p>What this should become over time.</p>
+                </div>
+              </div>
+              <div class="module-grid">
+                <article class="module">
+                  <div class="module-top">
+                    <div class="module-index" style="background: var(--blue);">1</div>
+                    <div><h4>Learn</h4><div class="module-meta">Short lessons, exact sequence, clear checkpoints</div></div>
+                  </div>
+                  <p class="muted">Use this for concepts like APIs, JWT, JPA, Docker, Kafka. Each lesson should end with code.</p>
+                </article>
+                <article class="module">
+                  <div class="module-top">
+                    <div class="module-index" style="background: var(--green);">2</div>
+                    <div><h4>Build</h4><div class="module-meta">Projects, tasks, milestones, GitHub polish</div></div>
+                  </div>
+                  <p class="muted">Your projects are the proof. Course certificates matter less than deployed working apps.</p>
+                </article>
+                <article class="module">
+                  <div class="module-top">
+                    <div class="module-index" style="background: var(--orange);">3</div>
+                    <div><h4>Revise</h4><div class="module-meta">Notes, interview answers, architecture diagrams</div></div>
+                  </div>
+                  <p class="muted">Every important concept should become a note in your own Hinglish words.</p>
+                </article>
+                <article class="module">
+                  <div class="module-top">
+                    <div class="module-index" style="background: var(--violet);">4</div>
+                    <div><h4>Apply</h4><div class="module-meta">Resume, referrals, mocks, company tracking</div></div>
+                  </div>
+                  <p class="muted">From early 2027, convert the learning platform into an interview preparation cockpit.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <aside class="grid">
+            <div class="card">
+              <h3>Personal Strategy</h3>
+              <p class="muted">Backend first is the right call. React enough to build clean UI and understand API integration. DSA should stay in maintenance mode, not disappear fully.</p>
+            </div>
+            <div class="card">
+              <h3>Best Daily Split</h3>
+              <div class="checklist">
+                <label class="check"><input type="checkbox" data-task="daily-learn">90 min concept learning</label>
+                <label class="check"><input type="checkbox" data-task="daily-code">120 min coding/building</label>
+                <label class="check"><input type="checkbox" data-task="daily-notes">30 min notes and README</label>
+                <label class="check"><input type="checkbox" data-task="daily-dsa">30 min DSA maintenance</label>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="curriculum">
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h3>Curriculum Tracks</h3>
+              <p>Backend depth plus practical full-stack understanding. Ye order follow karna.</p>
+            </div>
+          </div>
+          <div class="module-grid">
+            <article class="module">
+              <div class="module-top">
+                <div class="module-index" style="background: var(--blue);">01</div>
+                <div><h4>Web Basics</h4><div class="module-meta">2-3 weeks</div></div>
+              </div>
+              <div class="pill-row">
+                <span class="pill">HTML forms</span><span class="pill">CSS layout</span><span class="pill">JavaScript</span><span class="pill">Fetch API</span>
+              </div>
+              <label class="check"><input type="checkbox" data-task="track-web">Done: basic UI calling an API and showing JSON response.</label>
+            </article>
+
+            <article class="module">
+              <div class="module-top">
+                <div class="module-index" style="background: var(--orange);">02</div>
+                <div><h4>Java Production Core</h4><div class="module-meta">3-4 weeks</div></div>
+              </div>
+              <div class="pill-row">
+                <span class="pill">OOP</span><span class="pill">Collections</span><span class="pill">Streams</span><span class="pill">JUnit</span>
+              </div>
+              <label class="check"><input type="checkbox" data-task="track-java">Done: Java mini-project with tests and clean packages.</label>
+            </article>
+
+            <article class="module">
+              <div class="module-top">
+                <div class="module-index" style="background: var(--green);">03</div>
+                <div><h4>Spring Boot Backend</h4><div class="module-meta">8-10 weeks</div></div>
+              </div>
+              <div class="pill-row">
+                <span class="pill">REST</span><span class="pill">JPA</span><span class="pill">MySQL</span><span class="pill">DTOs</span><span class="pill">Tests</span>
+              </div>
+              <label class="check"><input type="checkbox" data-task="track-spring">Done: backend API with CRUD, validation, exception handling, pagination.</label>
+            </article>
+
+            <article class="module">
+              <div class="module-top">
+                <div class="module-index" style="background: var(--red);">04</div>
+                <div><h4>React Integration</h4><div class="module-meta">4-5 weeks</div></div>
+              </div>
+              <div class="pill-row">
+                <span class="pill">Components</span><span class="pill">Hooks</span><span class="pill">Router</span><span class="pill">Axios</span>
+              </div>
+              <label class="check"><input type="checkbox" data-task="track-react">Done: React UI connected to Spring Boot API.</label>
+            </article>
+
+            <article class="module">
+              <div class="module-top">
+                <div class="module-index" style="background: var(--violet);">05</div>
+                <div><h4>JWT and Security</h4><div class="module-meta">4 weeks</div></div>
+              </div>
+              <div class="pill-row">
+                <span class="pill">Auth</span><span class="pill">Roles</span><span class="pill">Filter chain</span><span class="pill">Refresh token</span>
+              </div>
+              <label class="check"><input type="checkbox" data-task="track-security">Done: protected APIs and protected React routes with JWT.</label>
+            </article>
+
+            <article class="module">
+              <div class="module-top">
+                <div class="module-index" style="background: var(--teal);">06</div>
+                <div><h4>Docker, Kafka, Cloud</h4><div class="module-meta">6-8 weeks</div></div>
+              </div>
+              <div class="pill-row">
+                <span class="pill">Dockerfile</span><span class="pill">Compose</span><span class="pill">Kafka</span><span class="pill">AWS/Azure</span>
+              </div>
+              <label class="check"><input type="checkbox" data-task="track-devops">Done: deployed app with persistent cloud database.</label>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="lessons">
+        <div class="split">
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h3>Lesson Queue</h3>
+                <p>Short practical lessons. Complete, then make notes in your own words.</p>
+              </div>
+            </div>
+            <div class="lesson-list">
+              <article class="lesson"><input type="checkbox" data-task="lesson-http"><div><strong>HTTP, REST, JSON, status codes</strong><p>Understand GET, POST, PUT, DELETE, 200, 201, 400, 401, 403, 404, 500.</p></div><span class="tag frontend">Web</span></article>
+              <article class="lesson"><input type="checkbox" data-task="lesson-controller"><div><strong>Controller, Service, Repository</strong><p>Controller receives request, service owns business logic, repository talks to DB.</p></div><span class="tag backend">Backend</span></article>
+              <article class="lesson"><input type="checkbox" data-task="lesson-jpa"><div><strong>JPA entities and relationships</strong><p>Learn one-to-many, many-to-one, lazy loading, DTO mapping, and N+1 basics.</p></div><span class="tag backend">Backend</span></article>
+              <article class="lesson"><input type="checkbox" data-task="lesson-react-api"><div><strong>React API service layer</strong><p>Create api.js, centralize base URL, attach JWT header, handle loading and errors.</p></div><span class="tag frontend">React</span></article>
+              <article class="lesson"><input type="checkbox" data-task="lesson-jwt"><div><strong>JWT login flow</strong><p>Login, token generation, Authorization header, filter validation, protected endpoint.</p></div><span class="tag security">Security</span></article>
+              <article class="lesson"><input type="checkbox" data-task="lesson-docker"><div><strong>Docker compose for Spring Boot + MySQL</strong><p>Run app and DB together locally. Learn volumes so DB data does not vanish.</p></div><span class="tag devops">DevOps</span></article>
+              <article class="lesson"><input type="checkbox" data-task="lesson-cloud-db"><div><strong>Cloud database persistence</strong><p>Use AWS RDS or Azure Database. App restarts should not delete your data.</p></div><span class="tag cloud">Cloud</span></article>
+            </div>
+          </div>
+
+          <aside class="card">
+            <h3>Add Custom Task</h3>
+            <form class="form-grid" id="taskForm">
+              <div class="field">
+                <label for="taskTitle">Task</label>
+                <input id="taskTitle" placeholder="Example: Build login API">
+              </div>
+              <div class="field">
+                <label for="taskArea">Area</label>
+                <select id="taskArea">
+                  <option>Backend</option>
+                  <option>Frontend</option>
+                  <option>Security</option>
+                  <option>DevOps</option>
+                  <option>Interview</option>
+                </select>
+              </div>
+              <button class="btn blue" type="submit">Add task</button>
+            </form>
+            <div class="lesson-list" id="customTasks" style="margin-top: 12px;"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="projects">
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h3>Project Lab</h3>
+              <p>Projects are your interview proof. Make them deployed, documented, and explainable.</p>
+            </div>
+          </div>
+          <div class="project-list">
+            <article class="project">
+              <strong>Project 1: Task Manager REST API</strong>
+              <p>Spring Boot, MySQL, CRUD, pagination, validation, global exceptions, tests, Postman collection.</p>
+              <div class="checklist">
+                <label class="check"><input type="checkbox" data-task="project1-api">API endpoints complete</label>
+                <label class="check"><input type="checkbox" data-task="project1-tests">JUnit and Mockito tests added</label>
+                <label class="check"><input type="checkbox" data-task="project1-readme">README and API examples written</label>
+              </div>
+            </article>
+
+            <article class="project">
+              <strong>Project 2: Auth Notes Full Stack App</strong>
+              <p>React + Spring Boot with JWT login/register, protected routes, notes CRUD, MySQL persistence.</p>
+              <div class="checklist">
+                <label class="check"><input type="checkbox" data-task="project2-auth">JWT auth complete</label>
+                <label class="check"><input type="checkbox" data-task="project2-react">React connected to backend</label>
+                <label class="check"><input type="checkbox" data-task="project2-deploy">Frontend, backend, database deployed</label>
+              </div>
+            </article>
+
+            <article class="project">
+              <strong>Project 3: E-Commerce or Inventory System</strong>
+              <p>Products, cart, orders, admin dashboard, inventory updates, Docker, cloud DB, clear architecture diagram.</p>
+              <div class="checklist">
+                <label class="check"><input type="checkbox" data-task="project3-schema">Database schema designed</label>
+                <label class="check"><input type="checkbox" data-task="project3-admin">Admin and user flows built</label>
+                <label class="check"><input type="checkbox" data-task="project3-architecture">Architecture diagram added</label>
+              </div>
+            </article>
+
+            <article class="project">
+              <strong>Project 4: Kafka Notification Service</strong>
+              <p>Order placed event, Kafka producer, Kafka consumer, notification table, optional email sending.</p>
+              <div class="checklist">
+                <label class="check"><input type="checkbox" data-task="project4-producer">Producer publishes event</label>
+                <label class="check"><input type="checkbox" data-task="project4-consumer">Consumer processes event</label>
+                <label class="check"><input type="checkbox" data-task="project4-demo">Demo steps documented</label>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="notes">
+        <div class="split">
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h3>My Notes</h3>
+                <p>Add explanations, project decisions, interview answers, and doubts.</p>
+              </div>
+            </div>
+            <div class="note-list" id="notesList"></div>
+          </div>
+
+          <aside class="card">
+            <h3>Add Note</h3>
+            <form class="form-grid" id="noteForm">
+              <div class="field">
+                <label for="noteTitle">Title</label>
+                <input id="noteTitle" placeholder="Example: JWT flow">
+              </div>
+              <div class="field">
+                <label for="noteCategory">Category</label>
+                <select id="noteCategory">
+                  <option>Backend</option>
+                  <option>Frontend</option>
+                  <option>Security</option>
+                  <option>Database</option>
+                  <option>Cloud</option>
+                  <option>Interview</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="noteBody">Note</label>
+                <textarea id="noteBody" placeholder="Write in Hindi + English. Example: Frontend request bhejta hai, backend validate karta hai..."></textarea>
+              </div>
+              <button class="btn blue" type="submit">Save note</button>
+            </form>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="flow">
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h3>Full Stack Flow</h3>
+              <p>Ye samajh aa gaya, to development ka 50 percent confusion clear ho jaata hai.</p>
+            </div>
+          </div>
+          <div class="flow">
+            <article class="flow-card"><h4>1. User action</h4><p>User React form submit karta hai. Data state mein hota hai: email, password, title, order, etc.</p></article>
+            <article class="flow-card"><h4>2. API call</h4><p>React <code>fetch</code> or <code>axios</code> se backend URL call karta hai with method, headers, and JSON body.</p></article>
+            <article class="flow-card"><h4>3. Security filter</h4><p>Spring Security checks token. Public API allowed. Protected API needs valid JWT.</p></article>
+            <article class="flow-card"><h4>4. Controller</h4><p><code>@RestController</code> request receive karta hai and service ko call karta hai. Controller should stay thin.</p></article>
+            <article class="flow-card"><h4>5. Service and DB</h4><p>Service business logic run karti hai. Repository JPA ke through MySQL se data save/read karti hai.</p></article>
+            <article class="flow-card"><h4>6. Response</h4><p>Backend JSON return karta hai. React state update hoti hai, UI refresh hota hai, user result dekhta hai.</p></article>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 14px;">
+          <h3>Persistence Rule</h3>
+          <p class="muted">If your deployed app saves data in MySQL/Postgres cloud database, data remains after refresh/restart. If it saves only in React state, data is lost on refresh. If it saves in localStorage, data stays only in that browser, not for all users.</p>
+        </div>
+      </section>
+
+      <section class="view" id="timeline">
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h3>Timeline Till July 2027</h3>
+              <p>Practical sequence with enough buffer for internship, PPO, and product-company prep.</p>
+            </div>
+          </div>
+          <div class="timeline-list">
+            <article class="timeline-item"><strong>May-Jun 2026</strong><p>Web basics, Java production core, Git/GitHub discipline. Build small apps.</p></article>
+            <article class="timeline-item"><strong>Jul-Sep 2026</strong><p>Spring Boot, REST APIs, MySQL, JPA, validation, exceptions, testing.</p></article>
+            <article class="timeline-item"><strong>Oct 2026</strong><p>React basics and API integration. Connect UI to your Spring Boot backend.</p></article>
+            <article class="timeline-item"><strong>Nov 2026</strong><p>Spring Security, JWT, refresh token, role-based access, protected routes.</p></article>
+            <article class="timeline-item"><strong>Dec-Jan 2027</strong><p>Docker, cloud deployment, persistent database, README, diagrams.</p></article>
+            <article class="timeline-item"><strong>Feb-Mar 2027</strong><p>Flagship project. Add admin flows, tests, deployment, architecture explanation.</p></article>
+            <article class="timeline-item"><strong>Apr-May 2027</strong><p>Kafka basics, system design basics, LLD basics, mock interviews.</p></article>
+            <article class="timeline-item"><strong>Jun-Jul 2027</strong><p>Resume, referrals, targeted applications, PPO decision, DSA revision.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="resources">
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h3>Resource Library</h3>
+              <p>Use fewer resources. Complete projects, not playlists.</p>
+            </div>
+          </div>
+          <div class="resource-list">
+            <article class="resource"><div><strong>Java foundation</strong><p>MOOC.fi Java or Tim Buchalka. Pick one, then move to projects.</p></div><a href="https://java-programming.mooc.fi/" target="_blank" rel="noreferrer">Open</a></article>
+            <article class="resource"><div><strong>Spring Boot</strong><p>Chad Darby Udemy plus Spring official guides. Best for your backend target.</p></div><a href="https://spring.io/guides" target="_blank" rel="noreferrer">Open</a></article>
+            <article class="resource"><div><strong>Frontend basics</strong><p>MDN for HTML/CSS/JS, React official docs, Namaste React for Indian explanation style.</p></div><a href="https://react.dev/learn" target="_blank" rel="noreferrer">Open</a></article>
+            <article class="resource"><div><strong>Security</strong><p>Java Techie, Amigoscode, Eazy Bytes Spring Security. Focus on explaining filter chain and JWT flow.</p></div><span class="tag security">Security</span></article>
+            <article class="resource"><div><strong>Docker and Kafka</strong><p>Docker docs, TechWorld with Nana, Apache Kafka quickstart, Stephane Maarek Kafka if paid.</p></div><a href="https://docs.docker.com/get-started/" target="_blank" rel="noreferrer">Open</a></article>
+            <article class="resource"><div><strong>Cloud deployment</strong><p>Start with Render/Railway/Vercel for speed, then AWS RDS/EC2 or Azure App Service for depth.</p></div><span class="tag cloud">Cloud</span></article>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast">Saved</div>
+
+  <script src="assets/data/platform-data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
